@@ -2,16 +2,57 @@
 
 namespace Admin\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\User as ZfcUserEntity;
 
+/**
+ * User
+ *
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"}), @ORM\UniqueConstraint(name="email", columns={"email"})})
+ * @ORM\Entity
+ */
 class User extends ZfcUserEntity
 {
-    protected $firstName;
-
-    protected $secondName;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
+     */
+    private $firstName;
 
     /**
-     * @return the $firstName
+     * @var string
+     *
+     * @ORM\Column(name="second_name", type="string", length=50, nullable=false)
+     */
+    private $secondName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="confirmation_code", type="string", length=50, nullable=false)
+     */
+    private $confirmationCode;
+
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
      */
     public function getFirstName()
     {
@@ -19,7 +60,23 @@ class User extends ZfcUserEntity
     }
 
     /**
-     * @return the $secondName
+     * Set secondName
+     *
+     * @param string $secondName
+     *
+     * @return User
+     */
+    public function setSecondName($secondName)
+    {
+        $this->secondName = $secondName;
+
+        return $this;
+    }
+
+    /**
+     * Get secondName
+     *
+     * @return string
      */
     public function getSecondName()
     {
@@ -27,21 +84,26 @@ class User extends ZfcUserEntity
     }
 
     /**
-     * @param unknown $firstName
+     * Set confirmationCode
+     *
+     * @param string $confirmationCode
+     *
+     * @return User
      */
-    public function setFirstName($firstName)
+    public function setConfirmationCode($confirmationCode)
     {
-        $this->firstName = (int)$firstName;
+        $this->confirmationCode = $confirmationCode;
+
         return $this;
     }
 
     /**
-     * @param field_type $secondName
+     * Get confirmationCode
+     *
+     * @return string
      */
-    public function setSecondName($secondName)
+    public function getConfirmationCode()
     {
-        $this->secondName = (int)$secondName;
-        return $this;
+        return $this->confirmationCode;
     }
-
 }
