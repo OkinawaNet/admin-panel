@@ -37,4 +37,21 @@ class Module
             ),
         );
     }
+
+    public function getControllerConfig()
+    {
+        return array(
+            'factories' => array(
+                'zfcuser' => function($controllerManager) {
+                    /* @var ControllerManager $controllerManager*/
+                    $serviceManager = $controllerManager->getServiceLocator();
+                    /* @var RedirectCallback $redirectCallback */
+                    $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
+                    /* @var \Admin\Controller\UserController $controller */
+                    $controller = new \Admin\Controller\UserController ($redirectCallback);
+                    return $controller;
+                },
+            ),
+        );
+    }
 }
