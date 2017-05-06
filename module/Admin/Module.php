@@ -34,6 +34,11 @@ class Module
 
                     return $transport;
                 },
+                'mail.username' => function(ServiceManager $serviceManager) {
+                    $config = $serviceManager->get('Config');
+                    $mail = $config['mail']['transport']['options']['connection_config']['username'];
+                    return $mail;
+                }
             ),
         );
     }

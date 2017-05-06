@@ -1,4 +1,6 @@
 <?php
+use Application\Service;
+use Application\Mapper;
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -43,6 +45,30 @@ return array(
                     ),
                 ),
             ),
+            'zfcuser' => array(
+                'type' => 'Literal',
+                'priority' => 1000,
+                'options' => array(
+                    'route' => '/user',
+                    'defaults' => array(
+                        'controller' => 'zfcuser',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'confirm' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/confirm',
+                            'defaults' => array(
+                                'controller' => 'zfcuser',
+                                'action'     => 'confirm',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(
@@ -50,4 +76,5 @@ return array(
             'admin' => __DIR__ . '/../view',
         ),
     ),
+
 );

@@ -10,6 +10,7 @@ use Zend\Stdlib\Parameters;
 use Zend\View\Model\ViewModel;
 use ZfcUser\Service\User as UserService;
 use ZfcUser\Options\UserControllerOptionsInterface;
+use Zend\Mail;
 
 class UserController extends AdminUserController
 {
@@ -55,6 +56,8 @@ class UserController extends AdminUserController
         $post = $prg;
         $user = $service->register($post);
 
+        //$this->setConfirmationCode($this->generateConfirmationCode());
+
         $redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
 
         if (!$user) {
@@ -64,6 +67,8 @@ class UserController extends AdminUserController
                 'redirect' => $redirect,
             );
         }
+
+        $this->sendConfirmationEmail($user);
 
         if ($service->getOptions()->getLoginAfterRegistration()) {
             $identityFields = $service->getOptions()->getAuthIdentityFields();
@@ -79,5 +84,52 @@ class UserController extends AdminUserController
 
         // TODO: Add the redirect parameter here...
         return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+    }
+
+    /**
+     * Register new user
+     */
+    public function confirmAction()
+    {
+
+    }
+
+    /**
+ * Set changeEmailForm.
+ *
+ * @param $changeEmailForm - the value to set.
+ * @return $this
+ */
+    public function sendConfirmationEmail($user)
+    {
+        $transport = $this->getServiceLocator()->get('mail.transport');
+        $from = $this->getServiceLocator()->get('mail.username');
+
+        $url = $this->url()->fromRoute('zfcuser/confirm', array('code' => 228));
+
+        $mail = new Mail\Message();
+        $mail->setFrom($from);
+        $mail->addTo($user->getEmail(), $user->getFirstName());
+        $mail->setSubject('Follow this link to confirm your email address');
+        $mail->setBody($url);
+
+        $transport->send($mail);
+    }
+
+    /**
+     * generate confirmation code
+     *
+     * @param $length - the length of code.
+     * @return $code
+     */
+    public function generateConfirmationCode($length = 50)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
