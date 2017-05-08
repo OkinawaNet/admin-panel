@@ -16,21 +16,21 @@ class User extends ZfcUserEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="first_name", type="string", length=50, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="second_name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="second_name", type="string", length=50, nullable=true)
      */
     private $secondName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="confirmation_code", type="string", length=50, nullable=false)
+     * @ORM\Column(name="confirmation_code", type="string", length=50, nullable=true)
      */
     private $confirmationCode;
 

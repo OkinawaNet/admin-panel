@@ -17,13 +17,12 @@ return array(
                     __DIR__ . '/../src/Admin/Entity',
                 ),
             ),
-
             // default metadata driver, aggregates all other drivers into a single one.
             // Override `orm_default` only if you know what you're doing
             'orm_default' => array(
                 'drivers' => array(
                     // register `my_annotation_driver` for any entity under namespace `My\Namespace`
-                    'Admin\Entity' => 'admin_entity'
+                    'Admin\Entity' => 'admin_entity',
                 )
             )
         )
