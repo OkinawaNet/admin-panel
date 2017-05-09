@@ -56,9 +56,6 @@ class UserController extends AdminUserController
         $post = $prg;
         $user = $service->register($post);
 
-        $user->setConfirmationCode($this->generateConfirmationCode());
-        $service->getUserMapper()->update($user);
-
         $redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
 
         if (!$user) {
@@ -68,6 +65,9 @@ class UserController extends AdminUserController
                 'redirect' => $redirect,
             );
         }
+
+        $user->setConfirmationCode($this->generateConfirmationCode());
+        $service->getUserMapper()->update($user);
 
         $this->sendConfirmationEmail($user);
 

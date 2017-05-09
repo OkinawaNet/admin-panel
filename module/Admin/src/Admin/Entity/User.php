@@ -23,9 +23,9 @@ class User extends ZfcUserEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="second_name", type="string", length=50, nullable=true)
+     * @ORM\Column(name="last_name", type="string", length=50, nullable=true)
      */
-    private $secondName;
+    private $lastName;
 
     /**
      * @var string
@@ -66,9 +66,9 @@ class User extends ZfcUserEntity
      *
      * @return User
      */
-    public function setSecondName($secondName)
+    public function setLastName($secondName)
     {
-        $this->secondName = $secondName;
+        $this->lastName = $secondName;
 
         return $this;
     }
@@ -78,9 +78,9 @@ class User extends ZfcUserEntity
      *
      * @return string
      */
-    public function getSecondName()
+    public function getLastName()
     {
-        return $this->secondName;
+        return $this->lastName;
     }
 
     /**
