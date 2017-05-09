@@ -84,7 +84,7 @@ class UserController extends AdminUserController
         }
 
         // TODO: Add the redirect parameter here...
-        return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+        return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect=' . rawurlencode($redirect) : ''));
     }
 
     /**
@@ -92,21 +92,48 @@ class UserController extends AdminUserController
      */
     public function confirmAction()
     {
+        $status = false;
 
+        $user_id = $this->getEvent()->getRouteMatch()->getParam('user_id');
+        $code = $this->getEvent()->getRouteMatch()->getParam('code');
+
+        $service = $this->getUserService();
+        $user = $service->getUserMapper()->findById($user_id);
+
+        if (!$user) {
+            // redirect to the login redirect route
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+        }
+
+        if ($code == $user->getConfirmationCode()) {
+            $user->setState(1);
+            $service->getUserMapper()->update($user);
+            $status = true;
+        }
+        return array(
+            'status' => $status,
+        );
     }
 
     /**
- * Set changeEmailForm.
- *
- * @param $changeEmailForm - the value to set.
- * @return $this
- */
+     * Send confirmation email.
+     *
+     * @param $user
+     * @return $this
+     */
     public function sendConfirmationEmail($user)
     {
         $transport = $this->getServiceLocator()->get('mail.transport');
         $from = $this->getServiceLocator()->get('mail.username');
 
-        $url = $this->url()->fromRoute('zfcuser/confirm', array('code' => 228));
+        $url = $this->url()->fromRoute(
+            'zfcuser/confirm',
+            array(
+                'user_id' => $user->getId(),
+                'code' => $user->getConfirmationCode()
+            ),
+            array('force_canonical' => true)
+        );
 
         $mail = new Mail\Message();
         $mail->setFrom($from);
@@ -120,7 +147,7 @@ class UserController extends AdminUserController
     /**
      * generate confirmation code
      *
-     * @param $length - the length of code.
+     * @param $length - the length of the code.
      * @return $code
      */
     public function generateConfirmationCode($length = 50)

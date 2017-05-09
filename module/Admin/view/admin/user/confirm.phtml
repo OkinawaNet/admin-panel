@@ -1,4 +1,7 @@
 <h1><?php echo $this->translate('email confirmation'); ?></h1>
 
-
-<p>Supp nigga</p>
+<?php if ($status === true) : ?>
+    <div class="alert alert-success"><?php echo $this->translate('Email address confirmed successfully.'); ?></div>
+<?php elseif ($status === false) : ?>
+    <div class="alert alert-error"><?php echo $this->translate('Unable to confirm your email address. Please try again.'); ?></div>
+<?php endif; ?>

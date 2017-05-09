@@ -46,10 +46,9 @@ return array(
                 ),
             ),
             'zfcuser' => array(
-                'type' => 'Literal',
-                'priority' => 1000,
+                'type'    => 'Literal',
                 'options' => array(
-                    'route' => '/user',
+                    'route'    => '/user',
                     'defaults' => array(
                         'controller' => 'zfcuser',
                         'action'     => 'index',
@@ -58,13 +57,17 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(
                     'confirm' => array(
-                        'type' => 'Literal',
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/confirm',
+                            'route' => '/confirm[/:user_id][/:code]',
+                            'constraints' => array(
+                                'user_id'    => '[0-9]+',
+                                'code'     => '[a-zA-Z0-9_-]*',
+                                ),
                             'defaults' => array(
                                 'controller' => 'zfcuser',
                                 'action'     => 'confirm',
-                            ),
+                            )
                         ),
                     ),
                 ),
