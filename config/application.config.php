@@ -10,6 +10,8 @@ return array(
         'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
+        'ScnSocialAuth',
+        'ScnSocialAuthDoctrineORM',
         'ZfcBase',
         'ZfcUser',
         'ZfcUserDoctrineORM',

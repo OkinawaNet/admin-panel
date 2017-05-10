@@ -1,16 +1,8 @@
 <?php
-/**
- * Global Configuration Override
- *
- * You can use this file for overriding configuration values from modules, etc.
- * You would place values in here that are agnostic to the environment and not
- * sensitive to security.
- *
- * @NOTE: In practice, this file will typically be INCLUDED in your source
- * control, so do not include passwords or other sensitive information in this
- * file.
- */
 
 return array(
-    // ...
+    'scn-social-auth' => array(
+        'google_client_id' => '592105986464-4eps2qoth2pusmka47tptfu3t52dlloe.apps.googleusercontent.com',
+        'google_secret' => 'UhJO6Jw5jGiSc4t2Xzg4hiSW',
+    ),
 );
