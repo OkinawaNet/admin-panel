@@ -97,13 +97,21 @@ class Module
                         ),
                     )
                 );
+            }
+        );
+
+        $sharedEvents->attach('ZfcUser\Form\Login',
+            'init',
+            function ($e) {
+                /* @var $form \ZfcUser\Form\Login */
+                $form = $e->getTarget();
 
                 $form->add(
                     array(
-                        'name' => 'logged_in',
+                        'name' => 'signed_in',
                         'type' => 'Zend\Form\Element\Checkbox',
                         'options' => array(
-                            'label' => 'Stay logged in',
+                            'label' => 'Stay signed in',
                             'checked_value' => 1,
                             'unchecked_value' => 0,
                         ),
