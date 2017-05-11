@@ -62,6 +62,35 @@ class Module
         );
     }
 
+    public function onDispatch(MvcEvent $e)
+    {
+        $login = false;
+
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $authService = $serviceManager->get('zfcuser_auth_service');
+        $controller = $e->getTarget();
+
+        if ($authService->hasIdentity()) {
+            $login = true;
+        }
+
+        if (
+            !$authService->hasIdentity()
+            && $e->getRequest()->getRequestUri() != '/user/login'
+            && $e->getRequest()->getRequestUri() != '/user/register'
+        ) {
+            $response = $e->getResponse();
+            $response->setStatusCode(404);
+
+            return;
+        } elseif($e->getRequest()->getRequestUri() == '/user') {
+            return $controller->redirect()->toRoute('home');
+        }
+
+        $controller->layout()->login = $login;
+
+    }
+
     /**
      * Extends the ZfcUser registration form with custom fields
      *
@@ -70,6 +99,8 @@ class Module
     public function onBootstrap(MVCEvent $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
+
+        $eventManager->attach('dispatch', array($this, 'onDispatch' ));
         // custom fields of registration form (ZfcUser)
         $sharedEvents = $eventManager->getSharedManager();
         $sharedEvents->attach('ZfcUser\Form\Register',
@@ -221,9 +252,6 @@ class Module
                                     'min' => 3,
                                     'max' => 50,
                                 ),
-                            ),
-                            array(
-                                'name' => 'Alpha',
                             ),
                         ),
                     )
