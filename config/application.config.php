@@ -16,7 +16,8 @@ return array(
         'ZfcUser',
         'ZfcUserDoctrineORM',
         'Application',
-        'Admin'
+        'Admin',
+        'LdcUserProfile'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
