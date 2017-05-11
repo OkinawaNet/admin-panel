@@ -79,5 +79,12 @@ return array(
             'admin' => __DIR__ . '/../view',
         ),
     ),
+    'service_manager' => array(
+        'factories' => array(
+            'admin_extension_zfcuser'             => 'Admin\Extensions\ZfcUser\ZfcUserExtensionFactory',
+            'admin_extension_zfcuser_fieldset'    => 'Admin\Extensions\ZfcUser\ZfcUserFieldsetFactory',
+            'admin_extension_zfcuser_inputfilter' => 'Admin\Extensions\ZfcUser\ZfcUserInputFilterFactory',
+        ),
+    ),
 
 );

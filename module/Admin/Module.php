@@ -97,21 +97,13 @@ class Module
                         ),
                     )
                 );
-            }
-        );
-
-        $sharedEvents->attach('ZfcUser\Form\Login',
-            'init',
-            function ($e) {
-                /* @var $form \ZfcUser\Form\Login */
-                $form = $e->getTarget();
 
                 $form->add(
                     array(
-                        'name' => 'signed_in',
+                        'name' => 'logged_in',
                         'type' => 'Zend\Form\Element\Checkbox',
                         'options' => array(
-                            'label' => 'Stay signed in',
+                            'label' => 'Stay logged in',
                             'checked_value' => 1,
                             'unchecked_value' => 0,
                         ),
@@ -166,6 +158,9 @@ class Module
                                     'max' => 50,
                                 ),
                             ),
+                            array(
+                                'name' => 'Alpha',
+                            ),
                         ),
                     )
                 );
@@ -179,6 +174,60 @@ class Module
                         ),
                     ),
                 ));
+            }
+        );
+
+        $sharedEvents->attach('Admin\Extensions\ZfcUser\ZfcUserInputFilter',
+            'init',
+            function ($e) {
+                /* @var $form \Admin\Extensions\ZfcUser\ZfcUserInputFilter */
+                $filter = $e->getTarget();
+
+                // Custom field firstname
+                $filter->add(array(
+                        'name' => 'first_name',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim'),
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'StringLength',
+                                'options' => array(
+                                    'min' => 3,
+                                    'max' => 50,
+                                ),
+                            ),
+                            array(
+                                'name' => 'Alpha',
+                            ),
+                        ),
+                    )
+                );
+
+                // Custom field lastname
+                $filter->add(array(
+                        'name' => 'last_name',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim'),
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'StringLength',
+                                'options' => array(
+                                    'min' => 3,
+                                    'max' => 50,
+                                ),
+                            ),
+                            array(
+                                'name' => 'Alpha',
+                            ),
+                        ),
+                    )
+                );
             }
         );
     }

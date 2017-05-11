@@ -13,6 +13,7 @@
         "zendframework/zend-developer-tools": "1.0",
         "doctrine/doctrine-orm-module": "0.10",
         "zendframework/zftool": "dev-master",
-        "socalnick/scn-social-auth-doctrine-orm": "^1.6"
+        "socalnick/scn-social-auth-doctrine-orm": "^1.6",
+        "adamlundrigan/ldc-user-profile": "1.*@stable"
     }
 }
