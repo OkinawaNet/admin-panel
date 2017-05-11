@@ -10,3 +10,6 @@ composer.lock
 vendor/
 !vendor/README.md
 !vendor/ZF2/
+config/autoload/global.php
+config/autoload/mail.global.php
+
