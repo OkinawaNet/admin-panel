@@ -60,6 +60,10 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'login_navigation' => 'Application\Navigation\Service\LoginNavigationFactory'
+        ),
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -97,6 +101,28 @@ return array(
         'router' => array(
             'routes' => array(
             ),
+        ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Login',
+                'route' => 'zfcuser/login',
+            ),
+        ),
+        'login' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+            ),
+            array(
+                'label' => 'Profile',
+                'route' => 'ldc-user-profile',
+            ),
+            array(
+                'label' => 'Logout',
+                'route' => 'zfcuser/logout',
+            )
         ),
     ),
 
