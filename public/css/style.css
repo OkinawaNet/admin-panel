@@ -38,9 +38,16 @@ div.container a.brand {
 
 footer {
     position: absolute!important;
-    bottom: 65px!important;
+    bottom: 25px!important;
+}
+.zend_form input {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-bottom: 0px;
 }
 
 button {
-    margin-top: 20px;
+    margin-top: 5px;
 }

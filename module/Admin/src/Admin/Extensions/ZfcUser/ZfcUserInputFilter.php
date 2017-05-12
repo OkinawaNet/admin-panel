@@ -87,6 +87,16 @@ class ZfcUserInputFilter extends RegisterFilter
             ),
         ));
 
+        $this->add(array(
+            'name' => 'passwordVerify',
+            'validators' => array(
+                array(
+                    // What ever your namespace is etc determines this..
+                    'name' => 'Admin\Validators\PasswordValidator',
+                ),
+            ),
+        ));
+
         $this->get('password')->setRequired(false);
         $this->get('passwordVerify')->setRequired(false);
     }

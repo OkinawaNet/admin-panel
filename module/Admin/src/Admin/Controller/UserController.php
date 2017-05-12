@@ -138,7 +138,7 @@ class UserController extends AdminUserController
         $mail = new Mail\Message();
         $mail->setFrom($from);
         $mail->addTo($user->getEmail(), $user->getFirstName());
-        $mail->setSubject('Follow this link to confirm your email address');
+        $mail->setSubject('Follow the link to confirm your email address');
         $mail->setBody($url);
 
         $transport->send($mail);

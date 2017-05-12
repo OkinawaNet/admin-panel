@@ -74,10 +74,13 @@ class Module
             $login = true;
         }
 
+        $requestUri = $e->getRequest()->getRequestUri();
+
         if (
             !$authService->hasIdentity()
-            && $e->getRequest()->getRequestUri() != '/user/login'
-            && $e->getRequest()->getRequestUri() != '/user/register'
+            && (strpos($requestUri, '/user/login') === false)
+            && (strpos($requestUri, '/user/register') === false)
+            && (strpos($requestUri, '/user/confirm') === false)
         ) {
             $response = $e->getResponse();
             $response->setStatusCode(404);
@@ -132,18 +135,6 @@ class Module
                     ),
                     array(
                         'priority' => 1000
-                    )
-                );
-
-                $form->add(
-                    array(
-                        'name' => 'logged_in',
-                        'type' => 'Zend\Form\Element\Checkbox',
-                        'options' => array(
-                            'label' => 'Stay logged in',
-                            'checked_value' => 1,
-                            'unchecked_value' => 0,
-                        ),
                     )
                 );
             }

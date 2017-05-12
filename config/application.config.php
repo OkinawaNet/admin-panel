@@ -7,7 +7,6 @@
  */
 return array(
     'modules' => array(
-        'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
         'ScnSocialAuth',
@@ -15,6 +14,8 @@ return array(
         'ZfcBase',
         'ZfcUser',
         'ZfcUserDoctrineORM',
+        'GoalioRememberMe',
+        'GoalioRememberMeDoctrineORM',
         'Application',
         'Admin',
         'LdcUserProfile'

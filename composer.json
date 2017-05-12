@@ -14,6 +14,8 @@
         "doctrine/doctrine-orm-module": "0.10",
         "zendframework/zftool": "dev-master",
         "socalnick/scn-social-auth-doctrine-orm": "^1.6",
-        "adamlundrigan/ldc-user-profile": "1.*@stable"
+        "adamlundrigan/ldc-user-profile": "1.*@stable",
+        "goalio/goalio-rememberme": "1.*",
+        "goalio/goalio-rememberme-doctrine-orm": "dev-master"
     }
 }
