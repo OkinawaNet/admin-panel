@@ -9,7 +9,7 @@
 
 namespace Admin\Extensions\ZfcUser;
 
-use LdcUserProfile\Extensions\ZfcUser\Validator\NoOtherRecordExists;
+use Admin\Extensions\ZfcUser\Validator\NoOtherRecordExists;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

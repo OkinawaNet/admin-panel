@@ -28,6 +28,7 @@ $settings = array(
      */
     'registered_extensions' => array(
         'admin_extension_zfcuser' => true,
+        'ldc-user-profile_extension_zfcuser' => false
     )
 
 );

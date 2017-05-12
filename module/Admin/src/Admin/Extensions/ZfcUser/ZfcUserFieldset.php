@@ -10,15 +10,15 @@
 namespace Admin\Extensions\ZfcUser;
 
 use Zend\Form\Fieldset;
-use ZfcUser\Form\Base as ZfcUserBaseForm;
+use Admin\Form\AdminUserForm as AdminUserForm;
 
 class ZfcUserFieldset extends Fieldset
 {
-    public function __construct(ZfcUserBaseForm $baseForm)
+    public function __construct(AdminUserForm $baseForm)
     {
         parent::__construct('zfcuser');
 
-        foreach (array('userId', 'username', 'email', 'display_name', 'password', 'passwordVerify', 'first_name', 'last_name') as $field) {
+        foreach (array('userId', 'first_name', 'last_name', 'email', 'password', 'passwordVerify') as $field) {
             if ($baseForm->has($field)) {
                 $newName = ($field === 'userId' ? 'id' : $field);
                 $this->add($baseForm->get($field), array('name' => $newName));

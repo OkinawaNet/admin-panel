@@ -9,7 +9,7 @@
 
 namespace Admin\Extensions\ZfcUser;
 
-use LdcUserProfile\Extensions\AbstractExtension;
+use LdcUserProfile\Extensions\AbstractExtension as AbstractExtension;
 use Zend\Crypt\Password\Bcrypt;
 use ZfcUser\Entity\UserInterface;
 use ZfcUser\Service\User as UserService;

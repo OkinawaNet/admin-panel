@@ -31,6 +31,62 @@ class ZfcUserInputFilter extends RegisterFilter
             'validators' => array(),
         ));
 
+        $this->add(array(
+                'name' => 'first_name',
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 50,
+                        ),
+                    ),
+                    array(
+                        'name' => 'Alpha',
+                    ),
+                ),
+            )
+        );
+
+        // Custom field lastname
+        $this->add(array(
+                'name' => 'last_name',
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 50,
+                        ),
+                    ),
+                    array(
+                        'name' => 'Alpha',
+                    ),
+                ),
+            )
+        );
+
+
+        $this->add(array(
+            'name' => 'password',
+            'validators' => array(
+                array(
+                    // What ever your namespace is etc determines this..
+                    'name' => 'Admin\Validators\PasswordValidator',
+                ),
+            ),
+        ));
+
         $this->get('password')->setRequired(false);
         $this->get('passwordVerify')->setRequired(false);
     }
