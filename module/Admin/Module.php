@@ -116,6 +116,9 @@ class Module
                         'options' => array(
                             'label' => 'First name',
                         ),
+                    ),
+                    array(
+                        'priority' => 1001
                     )
                 );
 
@@ -126,6 +129,9 @@ class Module
                         'options' => array(
                             'label' => 'Last name',
                         ),
+                    ),
+                    array(
+                        'priority' => 1000
                     )
                 );
 
