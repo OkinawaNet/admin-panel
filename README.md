@@ -1,4 +1,4 @@
-AdminApplication
+Admin Panel Application
 =======================
 
 
