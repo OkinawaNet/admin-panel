@@ -70,6 +70,7 @@ class UserController extends AdminUserController
         $service->getUserMapper()->update($user);
 
         $this->sendConfirmationEmail($user);
+        $this->flashMessenger()->addSuccessMessage('Your information has been sent successfully. In order to complete your registration, please click the confirmation link in the email that we have sent to you.');
 
         if ($service->getOptions()->getLoginAfterRegistration()) {
             $identityFields = $service->getOptions()->getAuthIdentityFields();

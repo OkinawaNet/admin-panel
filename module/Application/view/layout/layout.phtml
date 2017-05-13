@@ -48,6 +48,9 @@
             </div>
         </nav>
         <div class="container">
+            <?php
+                echo $this->flashMessenger()->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+            ?>
             <?php echo $this->content; ?>
             <hr>
             <footer>
