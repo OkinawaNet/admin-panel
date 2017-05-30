@@ -193,6 +193,9 @@ class Module
                     )
                 );
 
+                $filter->remove('password');
+                $filter->remove('passwordVerify');
+
                 $filter->add(array(
                     'name' => 'password',
                     'validators' => array(
@@ -202,6 +205,20 @@ class Module
                         ),
                     ),
                 ));
+
+                $filter->add(array(
+                    'name'       => 'passwordVerify',
+                    'required'   => true,
+                    'validators' => array(
+                        array(
+                            'name'    => 'Identical',
+                            'options' => array(
+                                'token' => 'password',
+                            ),
+                        ),
+                    ),
+                ));
+
             }
         );
 
