@@ -77,6 +77,9 @@ class ZfcUserInputFilter extends RegisterFilter
         );
 
 
+        $this->remove('password');
+        $this->remove('passwordVerify');
+
         $this->add(array(
             'name' => 'password',
             'validators' => array(
@@ -88,11 +91,13 @@ class ZfcUserInputFilter extends RegisterFilter
         ));
 
         $this->add(array(
-            'name' => 'passwordVerify',
+            'name'       => 'passwordVerify',
             'validators' => array(
                 array(
-                    // What ever your namespace is etc determines this..
-                    'name' => 'Admin\Validators\PasswordValidator',
+                    'name'    => 'Identical',
+                    'options' => array(
+                        'token' => 'password',
+                    ),
                 ),
             ),
         ));
