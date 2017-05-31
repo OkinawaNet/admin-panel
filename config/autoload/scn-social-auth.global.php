@@ -53,7 +53,7 @@ $settings = array(
      * See the Facebook docs for a full list of available permissions:
      * http://developers.facebook.com/docs/reference/api/permissions.
      */
-    'facebook_scope' => 'public_profile',
+    'facebook_scope' => 'public_profile, email',
 
     /**
      * Facebook Display
